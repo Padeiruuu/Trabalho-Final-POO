@@ -174,10 +174,10 @@ public class FormularioEventos {
     }
 
     public void voltarAplicacao() {
-        Menu menu = new Menu();
         painel.removeAll();
         painel.setLayout(new GridLayout(1, 1, 5, 5));
-        painel.add(menu.getPainel());
+        MenuCadastros menuCadastros = new MenuCadastros();
+        painel.add(menuCadastros.getPainel());
         painel.revalidate();
         painel.repaint();
     }

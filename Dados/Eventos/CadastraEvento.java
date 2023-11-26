@@ -25,4 +25,8 @@ public class CadastraEvento {
         }
         return texto.toString();
     }
+
+    public static ArrayList<Evento> getEventos() {
+        return eventos;
+    }
 }
