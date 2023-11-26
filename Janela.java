@@ -1,6 +1,6 @@
 import javax.swing.*;
 
-import Dados.*;
+import Paineis.MenuPrincipal;
 
 public class Janela extends JFrame{
     private MenuPrincipal menuPrincipal;

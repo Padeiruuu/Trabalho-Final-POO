@@ -1,4 +1,4 @@
-package Dados;
+package Paineis;
 import javax.swing.*;
 
 import Dados.Eventos.CadastraEvento;

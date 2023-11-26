@@ -1,4 +1,4 @@
-package Dados;
+package Paineis;
 import java.awt.GridLayout;
 
 import javax.swing.*;
