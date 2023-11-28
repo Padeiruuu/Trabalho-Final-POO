@@ -9,6 +9,6 @@ public class Terremoto extends Evento{
     }
 
     public String toString() {
-        return "Terremoto\nCódigo: " + super.getCodigo() + "\nData: " + super.getData() + "\nLatitude: " + super.getLatitude() + "\nLongitude: " + super.getLongitude() + "\nMagnitude" + magnitude + " em escala Richter\n";
+        return "Terremoto\nCódigo: " + super.getCodigo() + "\nData: " + super.getData() + "\nLatitude: " + super.getLatitude() + "\nLongitude: " + super.getLongitude() + "\nMagnitude " + magnitude + " em escala Richter\n";
     }
 }

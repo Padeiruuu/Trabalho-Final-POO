@@ -10,6 +10,7 @@ public class MenuCadastros {
     private JButton equipamentosButton = new JButton("Equipamentos");
     private JButton atendimentosButton = new JButton("Atendimentos");
     private JButton equipesButton = new JButton("Equipes");
+    private JButton vinculoButton = new JButton("Vincular Equipamentos");
     private JButton voltarButton = new JButton("Voltar");
     private JPanel menuPanel = new JPanel();
 
@@ -32,11 +33,14 @@ public class MenuCadastros {
         painel.add(formularioAtendimentos.getPainel(), "Atendimentos");
         FormularioEquipes formularioEquipes = new FormularioEquipes();
         painel.add(formularioEquipes.getPainel(), "Equipes");
-        menuPanel.setLayout(new GridLayout(5, 1, 5, 5));
+        VinculoEquipamentoEquipe vínculoEquipamentoEquipe = new VinculoEquipamentoEquipe();
+        painel.add(vínculoEquipamentoEquipe.getPainel(), "Vinculo");
+        menuPanel.setLayout(new GridLayout(6, 1, 5, 5));
         menuPanel.add(eventosButton);
         menuPanel.add(equipamentosButton);
-        menuPanel.add(atendimentosButton);
         menuPanel.add(equipesButton);
+        menuPanel.add(atendimentosButton);
+        menuPanel.add(vinculoButton);
         menuPanel.add(voltarButton);
         painel.add(menuPanel, "Menu");
         cardLayout.show(painel, "Menu");
@@ -47,6 +51,7 @@ public class MenuCadastros {
         equipamentosButton.addActionListener(e -> cardLayout.show(painel, "Equipamentos"));
         atendimentosButton.addActionListener(e -> cardLayout.show(painel, "Atendimentos"));
         equipesButton.addActionListener(e -> cardLayout.show(painel, "Equipes"));
+        vinculoButton.addActionListener(e -> cardLayout.show(painel, "Vinculo"));
         voltarButton.addActionListener(e -> voltarAplicacao());
     }
 

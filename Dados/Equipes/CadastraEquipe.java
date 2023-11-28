@@ -2,6 +2,8 @@ package Dados.Equipes;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+import Dados.Atendimentos.CadastraAtendimento;
+
 public class CadastraEquipe {
     private static ArrayList<Equipe> equipes = new ArrayList<>();
 
@@ -13,6 +15,7 @@ public class CadastraEquipe {
         }
         equipes.add(equipe);
         ordenarEquipes();
+        CadastraAtendimento.vincularAtendimentos();
         return true;
     }
 
@@ -21,6 +24,9 @@ public class CadastraEquipe {
     }
 
     public static String obterTextoEquipes() {
+        if(equipes.isEmpty()) {
+            return "Não há equipes cadastradas.";
+        }
         StringBuilder texto = new StringBuilder();
         for (Equipe equipe : equipes) {
             texto.append(equipe.toString()).append("\n");

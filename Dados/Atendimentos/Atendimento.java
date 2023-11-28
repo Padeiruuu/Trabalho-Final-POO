@@ -16,18 +16,18 @@ public class Atendimento {
         this.duracao = duracao;
         this.status = "PENDENTE";
         this.evento = evento;
-        this.equipe = null;
+        this.equipe = equipe;
     }
 
     public double calculaCusto(){
         double custoEquipe = duracao * 250 * equipe.getQuantidadeMembros();
         double custoEquipamentos = duracao * equipe.getCustoDia();
-        double custoDeslocamento = equipe.getDistancia() * (100 * equipe.getQuantidadeMembros() + 0.10 * equipe.getCustoDia());
+        double custoDeslocamento = CadastraAtendimento.getDistancia(this,equipe) * (100 * equipe.getQuantidadeMembros() + 0.10 * equipe.getCustoDia());
         return custoEquipe + custoEquipamentos + custoDeslocamento;
     }
 
     public String toString() {
-        return "Código: " + cod + "\nData de Início: " + dataInicio + "\nDuração: " + duracao + "dias\nEvento: " + evento.getCodigo() + "\nStatus: " + status + "\n";
+        return "Código: " + cod + "\nData de Início: " + dataInicio + "\nDuração: " + duracao + " dias\nEvento: " + evento.getCodigo() + "\nStatus: " + status + "\n";
     }
 
     public int getCod() {
@@ -38,7 +38,27 @@ public class Atendimento {
         return evento;
     }
 
+    public String getDataInicio() {
+        return dataInicio;
+    }
+
+    public int getDuracao() {
+        return duracao;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public Equipe getEquipe() {
+        return equipe;
+    }
+
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public void setEquipe(Equipe equipe) {
+        this.equipe = equipe;
     }
 }

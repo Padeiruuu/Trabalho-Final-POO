@@ -44,7 +44,7 @@ public class FormularioAtendimentos {
     private void selecionaEvento() {
         for(Evento evento : CadastraEvento.getEventos()) {
             if (evento.getCodigo().equals(selectEvento.getSelectedItem())) {
-                campoDeMensagens.setText(CadastraEvento.obterTextoEventos());
+                campoDeMensagens.setText(evento.toString());
             }
         }
     }

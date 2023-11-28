@@ -19,6 +19,9 @@ public class CadastraEvento {
         eventos.sort(Comparator.comparing(Evento::getCodigo));
     }
     public static String obterTextoEventos() {
+        if(eventos.isEmpty()) {
+            return "Não há eventos cadastrados.";
+        }
         StringBuilder texto = new StringBuilder();
         for (Evento evento : eventos) {
             texto.append(evento.toString()).append("\n");

@@ -44,7 +44,7 @@ public class Equipe {
     public String getEquipamentosString() {
         String equipamentosString = "";
         for (int i = 0; i < equipamentos.size(); i++) {
-            equipamentosString += equipamentos.get(i).toString() + "\n";
+            equipamentosString += equipamentos.get(i).toString();
         }
         return equipamentosString;
     }

@@ -134,8 +134,8 @@ public class VinculoEquipamentoEquipe {
     private void voltarAplicacao() {
         painel.removeAll();
         painel.setLayout(new GridLayout(1, 1, 5, 5));
-        MenuPrincipal menuPrincipal = new MenuPrincipal();
-        painel.add(menuPrincipal.getPainel());
+        MenuCadastros MenuCadastros = new MenuCadastros();
+        painel.add(MenuCadastros.getPainel());
         painel.revalidate();
         painel.repaint();
     }

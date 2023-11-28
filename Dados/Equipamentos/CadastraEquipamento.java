@@ -21,6 +21,9 @@ public class CadastraEquipamento{
     }
 
     public static String obterTextoEquipamentos() {
+        if(equipamentos.isEmpty()) {
+            return "Não há equipamentos cadastrados.";
+        }
         StringBuilder texto = new StringBuilder();
         for (Equipamento equipamento : equipamentos) {
             texto.append(equipamento.toString()).append("\n");
