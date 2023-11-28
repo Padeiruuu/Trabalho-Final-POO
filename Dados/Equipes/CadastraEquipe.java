@@ -27,4 +27,8 @@ public class CadastraEquipe {
         }
         return texto.toString();
     }
+
+    public static ArrayList<Equipe> getEquipes() {
+        return equipes;
+    }
 }

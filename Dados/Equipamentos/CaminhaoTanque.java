@@ -13,6 +13,6 @@ public class CaminhaoTanque extends Equipamento{
     }
 
     public String toString() {
-        return "Caminhão Tanque\nID: " + super.getId() + "\nNome: " + super.getNome() + "\nCusto por dia: " + super.getCustoDia() + "\nCapacidade: " + capacidade + "\n";
+        return "Caminhão Tanque\nID: " + super.getId() + "\nNome: " + super.getNome() + "\nCusto por dia: R$" + super.getCustoDia() + "\nCapacidade: " + capacidade + "\n";
     }
 }

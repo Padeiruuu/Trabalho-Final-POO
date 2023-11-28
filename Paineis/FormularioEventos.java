@@ -7,6 +7,7 @@ import Dados.Eventos.Seca;
 import Dados.Eventos.Terremoto;
 
 import java.awt.*;
+import java.util.InputMismatchException;
 
 public class FormularioEventos {
     private JTextArea campoDeMensagens = new JTextArea();
@@ -136,10 +137,30 @@ public class FormularioEventos {
             String dataEvento = data.getText();
             double latitudeEvento = Double.parseDouble(latitude.getText());
             double longitudeEvento = Double.parseDouble(longitude.getText());
+            if(latitudeEvento < -90 || latitudeEvento > 90) {
+                campoDeMensagens.setText("Latitude inválida! Digite um valor entre -90 e 90.");
+                return;
+            }
+            if(longitudeEvento < -180 || longitudeEvento > 180) {
+                campoDeMensagens.setText("Longitude inválida! Digite um valor entre -180 e 180.");
+                return;
+            }
+            if(tipo == null) {
+                campoDeMensagens.setText("Selecione um tipo de evento!");
+                return;
+            }
             switch(tipo){
                 case "Ciclone":
                     double velocidadeCiclone = Double.parseDouble(velocidade.getText());
                     double precipitacaoCiclone = Double.parseDouble(precipitacao.getText());
+                    if(velocidadeCiclone < 0) {
+                        campoDeMensagens.setText("Velocidade inválida!");
+                        break;
+                    }
+                    if(precipitacaoCiclone < 0) {
+                        campoDeMensagens.setText("Precipitação inválida!");
+                        break;
+                    }
                     if(CadastraEvento.cadastrarEvento(new Ciclone(codigoEvento, dataEvento, latitudeEvento, longitudeEvento, velocidadeCiclone, precipitacaoCiclone))) {
                         campoDeMensagens.setText("Ciclone cadastrado com sucesso!");
                     } else {
@@ -148,6 +169,10 @@ public class FormularioEventos {
                     break;
                 case "Terremoto":
                     double magnitudeTerremoto = Double.parseDouble(magnitude.getText());
+                    if(magnitudeTerremoto < 0 || magnitudeTerremoto > 10) {
+                        campoDeMensagens.setText("Magnitude inválida! Digite um valor entre 0 e 10.");
+                        break;
+                    }
                     if(CadastraEvento.cadastrarEvento(new Terremoto(codigoEvento, dataEvento, latitudeEvento, longitudeEvento, magnitudeTerremoto))) {
                         campoDeMensagens.setText("Terremoto cadastrado com sucesso!");
                     } else {
@@ -168,12 +193,14 @@ public class FormularioEventos {
             }
         } catch (NumberFormatException n) {
             campoDeMensagens.setText("Dados inválidos! Verifique os campos novamente.");
+        } catch (InputMismatchException e) {
+            campoDeMensagens.setText("Dados inválidos! Verifique os campos novamente.");
         } catch (Exception e){
             campoDeMensagens.setText("Erro ao cadastrar equipamento!");
         }
     }
 
-    public void voltarAplicacao() {
+    private void voltarAplicacao() {
         painel.removeAll();
         painel.setLayout(new GridLayout(1, 1, 5, 5));
         MenuCadastros menuCadastros = new MenuCadastros();

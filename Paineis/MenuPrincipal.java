@@ -30,7 +30,9 @@ public class MenuPrincipal {
         painel.setLayout(cardLayout);
         MenuCadastros menuCadastros = new MenuCadastros();
         painel.add(menuCadastros.getPainel(), "Cadastros");
-        menuPanel.setLayout(new GridLayout(8, 1, 5, 5));
+        VinculoEquipamentoEquipe vínculoEquipamentoEquipe = new VinculoEquipamentoEquipe();
+        painel.add(vínculoEquipamentoEquipe.getPainel(), "Equipes");
+        menuPanel.setLayout(new GridLayout(3, 3, 5, 5));
         menuPanel.add(cadastrosButton);
         menuPanel.add(equipeButton);
         menuPanel.add(atendimentoButton);
@@ -54,5 +56,5 @@ public class MenuPrincipal {
         carregarButton2.addActionListener(e -> cardLayout.show(painel, "Carregar"));
         salvarButton.addActionListener(e -> cardLayout.show(painel, "Salvar"));
         fecharButton.addActionListener(e -> System.exit(0));
-    }
+    } 
 }

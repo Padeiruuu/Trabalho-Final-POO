@@ -1,9 +1,12 @@
 package Dados.Atendimentos;
-import java.util.ArrayList;
+import java.util.Queue;
 import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.ArrayList;
 
 public class CadastraAtendimento {
-    private static ArrayList<Atendimento> atendimentos = new ArrayList<>();
+    private static Queue<Atendimento> atendimentos = new LinkedList<>();
 
     public static boolean cadastrarAtendimento(Atendimento atendimento) {
         for(Atendimento a : atendimentos) {
@@ -19,8 +22,11 @@ public class CadastraAtendimento {
         return true;
     }
 
+
     private static void ordenarAtendimentos() {
-        atendimentos.sort(Comparator.comparing(Atendimento::getCod));
+        List<Atendimento> atendimentosList = new ArrayList<>(atendimentos);
+        atendimentosList.sort(Comparator.comparing(Atendimento::getCod));
+        atendimentos = new LinkedList<>(atendimentosList);
     }
 
     public static String obterTextoAtendimentos() {
@@ -29,5 +35,9 @@ public class CadastraAtendimento {
             texto.append(atendimento.toString()).append("\n");
         }
         return texto.toString();
+    }
+
+    public static Queue<Atendimento> getAtendimentos() {
+        return atendimentos;
     }
 }

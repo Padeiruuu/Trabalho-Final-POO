@@ -13,6 +13,6 @@ public class Barco extends Equipamento{
     }
 
     public String toString() {
-        return "Barco\nID: " + super.getId() + "\nNome: " + super.getNome() + "\nCusto por dia: " + super.getCustoDia() + "\nCapacidade: " + capacidade + "\n";
+        return "Barco\nID: " + super.getId() + "\nNome: " + super.getNome() + "\nCusto por dia: R$" + super.getCustoDia() + "\nCapacidade: " + capacidade + "\n";
     }
 }

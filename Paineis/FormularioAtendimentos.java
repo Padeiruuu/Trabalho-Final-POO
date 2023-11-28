@@ -7,6 +7,7 @@ import Dados.Eventos.CadastraEvento;
 import Dados.Eventos.Evento;
 
 import java.awt.*;
+import java.util.InputMismatchException;
 
 public class FormularioAtendimentos {
     private JTextArea campoDeMensagens = new JTextArea();
@@ -87,12 +88,16 @@ public class FormularioAtendimentos {
             int id = Integer.parseInt(this.id.getText());
             String data = this.data.getText();
             int duracao = Integer.parseInt(this.duracao.getText());
+            if(selectEvento.getSelectedItem() == null) {
+                campoDeMensagens.setText("Selecione um evento!");
+                return;
+            }
             for(Evento evento : CadastraEvento.getEventos()) {
                 if (evento.getCodigo().equals(selectEvento.getSelectedItem())) {
-                    if (CadastraAtendimento.cadastrarAtendimento(new Atendimento(id, data, duracao, evento))) {
+                    if (CadastraAtendimento.cadastrarAtendimento(new Atendimento(id, data, duracao, evento, null))) {
                         campoDeMensagens.setText("Atendimento cadastrado com sucesso!");
                     } else {
-                        campoDeMensagens.setText("Atendimento já cadastrado!");
+                        campoDeMensagens.setText("Atendimento já cadastrado ou evento inválido!");
                     }
                 }
             }
@@ -100,12 +105,15 @@ public class FormularioAtendimentos {
         catch (NumberFormatException e) {
             campoDeMensagens.setText("Dados inválidos! Verifique os campos novamente.");
         }
+        catch (InputMismatchException e) {
+            campoDeMensagens.setText("Dados inválidos! Verifique os campos novamente.");
+        }
         catch (Exception e) {
             campoDeMensagens.setText("Erro ao cadastrar atendimento!");
         }
     }
 
-    public void voltarAplicacao() {
+    private void voltarAplicacao() {
         painel.removeAll();
         painel.setLayout(new GridLayout(1, 1, 5, 5));
         MenuCadastros menuCadastros = new MenuCadastros();

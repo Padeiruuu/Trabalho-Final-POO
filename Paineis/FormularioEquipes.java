@@ -1,5 +1,6 @@
 package Paineis;
 import java.awt.GridLayout;
+import java.util.InputMismatchException;
 
 import javax.swing.*;
 
@@ -43,10 +44,10 @@ public class FormularioEquipes {
         painel1.add(codinome);
         painel1.add(digiteQuantidade);
         painel1.add(quantidade);
-        painel1.add(digiteLatitude);
-        painel1.add(latitude);
         painel1.add(digiteLongitude);
         painel1.add(longitude);
+        painel1.add(digiteLatitude);
+        painel1.add(latitude);
         painel1.add(cadastrarButton);
         painel1.add(limparButton);
         painel1.add(dadosButton);
@@ -73,7 +74,15 @@ public class FormularioEquipes {
             int quantidade = Integer.parseInt(this.quantidade.getText());
             double latitude = Double.parseDouble(this.latitude.getText());
             double longitude = Double.parseDouble(this.longitude.getText());
-            if (CadastraEquipe.cadastrarEquipe(new Equipe(codinome, quantidade, latitude, longitude))) {
+            if(latitude < -90 || latitude > 90) {
+                campoDeMensagens.setText("Latitude inválida! Digite um valor entre -90 e 90.");
+                return;
+            }
+            if(longitude < -180 || longitude > 180) {
+                campoDeMensagens.setText("Longitude inválida! Digite um valor entre -180 e 180.");
+                return;
+            }
+            if (CadastraEquipe.cadastrarEquipe(new Equipe(codinome, quantidade, latitude, longitude, null, null))) {
                 campoDeMensagens.setText("Equipe cadastrada com sucesso!");
             } else {
                 campoDeMensagens.setText("Equipe já cadastrada!");
@@ -81,8 +90,9 @@ public class FormularioEquipes {
         }
         catch (NumberFormatException e) {
             campoDeMensagens.setText("Dados inválidos! Verifique os campos novamente.");
-        }
-        catch (Exception e) {
+        } catch (InputMismatchException e) {
+            campoDeMensagens.setText("Dados inválidos! Verifique os campos novamente.");
+        } catch (Exception e) {
             campoDeMensagens.setText("Erro ao cadastrar equipe!");
         }
     }

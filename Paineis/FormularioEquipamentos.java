@@ -7,19 +7,20 @@ import Dados.Equipamentos.CaminhaoTanque;
 import Dados.Equipamentos.Escavadeira;
 
 import java.awt.*;
+import java.util.InputMismatchException;
 
 public class FormularioEquipamentos{
     private JTextArea campoDeMensagens = new JTextArea();
     private JPanel painel = new JPanel();
     private JPanel painel1 = new JPanel();
     private JPanel painel2 = new JPanel();
-    private JComboBox<String> selectType = new JComboBox<>();
+    private JComboBox<String> tipoDeEquipamento = new JComboBox<>();
     private JScrollPane scroll = new JScrollPane(campoDeMensagens);
     private JButton cadastrarButton = new JButton("Cadastrar");
     private JButton limparButton = new JButton("Limpar");
     private JButton dadosButton = new JButton("Mostrar Dados");
     private JButton voltarButton = new JButton("Voltar");
-    private JLabel tipoLabel = new JLabel("Selecione o tipo de equipamento:");
+    private JLabel tipoLabel = new JLabel("Selecione o Tipo de Equipamento:");
     private JLabel digiteID = new JLabel("Digite o ID:");
     private JLabel digiteNome = new JLabel("Digite o Nome:");
     private JLabel digiteCustoDia = new JLabel("Digite o Custo por Dia:");
@@ -28,8 +29,8 @@ public class FormularioEquipamentos{
     private JTextField custoDia = new JTextField();
     private JLabel digiteCapacidade = new JLabel("Digite a Capacidade:");
     private JTextField capacidade = new JTextField();
-    private JLabel digiteCombustivel = new JLabel("Digite o Combustível:");
-    private JTextField combustivel = new JTextField();
+    private JLabel digiteCombustivel = new JLabel("Selecione o Combustível:");
+    private JComboBox<String> combustivel = new JComboBox<>();
     private JLabel digiteCarga = new JLabel("Digite a Carga:");
     private JTextField carga = new JTextField();
 
@@ -39,20 +40,24 @@ public class FormularioEquipamentos{
 
     public FormularioEquipamentos() {
         formatarPainel();
-        selectType.addItem("Barco");
-        selectType.addItem("Caminhão Tanque");
-        selectType.addItem("Escavadeira");
-        selectType.setSelectedItem(null);
+        tipoDeEquipamento.addItem("Barco");
+        tipoDeEquipamento.addItem("Caminhão Tanque");
+        tipoDeEquipamento.addItem("Escavadeira");
+        tipoDeEquipamento.setSelectedItem(null);
+        combustivel.addItem("Diesel");
+        combustivel.addItem("Gasolina");
+        combustivel.addItem("Alcool");
+        combustivel.setSelectedItem(null);
         adicionarListeners();
     }
 
     private void formatarPainel() {
         painel1.removeAll();
-        if (selectType.getSelectedItem() == "Barco") {
+        if (tipoDeEquipamento.getSelectedItem() == "Barco") {
             painel1.setLayout(new GridLayout(7, 2, 5, 5));
-        } else if (selectType.getSelectedItem() == "Caminhão Tanque") {
+        } else if (tipoDeEquipamento.getSelectedItem() == "Caminhão Tanque") {
             painel1.setLayout(new GridLayout(7, 2, 5, 5));
-        } else if (selectType.getSelectedItem() == "Escavadeira") {
+        } else if (tipoDeEquipamento.getSelectedItem() == "Escavadeira") {
             painel1.setLayout(new GridLayout(8, 2, 5, 5));
         } else {
             painel1.setLayout(new GridLayout(6, 2, 5, 5));
@@ -70,15 +75,15 @@ public class FormularioEquipamentos{
         painel1.add(custoDia);
 
         painel1.add(tipoLabel);
-        painel1.add(selectType);
+        painel1.add(tipoDeEquipamento);
 
-        if (selectType.getSelectedItem() == "Barco") {
+        if (tipoDeEquipamento.getSelectedItem() == "Barco") {
             painel1.add(digiteCapacidade);
             painel1.add(capacidade);
-        } else if (selectType.getSelectedItem() == "Caminhão Tanque") {
+        } else if (tipoDeEquipamento.getSelectedItem() == "Caminhão Tanque") {
             painel1.add(digiteCapacidade);
             painel1.add(capacidade);
-        } else if (selectType.getSelectedItem() == "Escavadeira") {
+        } else if (tipoDeEquipamento.getSelectedItem() == "Escavadeira") {
             painel1.add(digiteCombustivel);
             painel1.add(combustivel);
             painel1.add(digiteCarga);
@@ -101,7 +106,7 @@ public class FormularioEquipamentos{
     }
 
     private void selecionaTipo() {
-        String tipo = (String) selectType.getSelectedItem();
+        String tipo = (String) tipoDeEquipamento.getSelectedItem();
         if (tipo != null) {
             formatarPainel();
         }
@@ -112,19 +117,31 @@ public class FormularioEquipamentos{
         limparButton.addActionListener(e -> limparCampos());
         dadosButton.addActionListener(e -> mostrarDadosCadastrados());
         voltarButton.addActionListener(e -> voltarAplicacao());
-        selectType.addActionListener(e -> selecionaTipo());
+        tipoDeEquipamento.addActionListener(e -> selecionaTipo());
     }
     
     private void cadastraEquipamento(){
         try{
-            String tipo = (String) selectType.getSelectedItem();
+            String tipo = (String) tipoDeEquipamento.getSelectedItem();
             int id = Integer.parseInt(this.id.getText());
             String nome = this.nome.getText();
             double custoDia = Double.parseDouble(this.custoDia.getText());
+            if(custoDia < 0) {
+                campoDeMensagens.setText("Custo por dia inválido!");
+                return;
+            }
+            if(tipo == null) {
+                campoDeMensagens.setText("Selecione um tipo de equipamento!");
+                return;
+            }
             switch(tipo){
                 case "Barco":
                     int capacidade = Integer.parseInt(this.capacidade.getText());
-                    if(CadastraEquipamento.cadastrarEquipamento(new Barco(capacidade, nome, custoDia, capacidade)))
+                    if(capacidade < 0){
+                        campoDeMensagens.setText("Capacidade inválida!");
+                        break;
+                    }
+                    if(CadastraEquipamento.cadastrarEquipamento(new Barco(id, nome, custoDia, capacidade)))
                         campoDeMensagens.setText("Barco cadastrado com sucesso!");
                     else{
                         campoDeMensagens.setText("Erro ao cadastrar equipamento!");
@@ -132,15 +149,27 @@ public class FormularioEquipamentos{
                     break;
                 case "Caminhão Tanque":
                     double capacidadeTanque = Double.parseDouble(this.capacidade.getText());
-                    if(CadastraEquipamento.cadastrarEquipamento(new CaminhaoTanque(id, nome, custoDia, capacidadeTanque)))
+                    if (capacidadeTanque < 0) {
+                        campoDeMensagens.setText("Capacidade inválida!");
+                        break;
+                    }
+                    if (CadastraEquipamento.cadastrarEquipamento(new CaminhaoTanque(id, nome, custoDia, capacidadeTanque)))
                         campoDeMensagens.setText("Caminhão Tanque cadastrado com sucesso!");
-                    else{   
+                    else {
                         campoDeMensagens.setText("Erro ao cadastrar equipamento!");
                     }
                     break;
-                case "Escavadeira":
-                    String combustivel = this.combustivel.getText();
+                    case "Escavadeira":
+                        String combustivel = (String) this.combustivel.getSelectedItem();
+                    if(combustivel == null) {
+                        campoDeMensagens.setText("Selecione um tipo de combustível!");
+                        break;
+                    }
                     double carga = Double.parseDouble(this.carga.getText());
+                    if(carga < 0) {
+                        campoDeMensagens.setText("Carga inválida!");
+                        break;
+                    }
                     if(CadastraEquipamento.cadastrarEquipamento(new Escavadeira(id, nome, custoDia, combustivel, carga)))
                         campoDeMensagens.setText("Escavadeira cadastrada com sucesso!");
                     else{
@@ -153,12 +182,14 @@ public class FormularioEquipamentos{
             }
         } catch (NumberFormatException n){
             campoDeMensagens.setText("Dados inválidos! Verifique os campos novamente.");
+        } catch (InputMismatchException e) {
+            campoDeMensagens.setText("Dados inválidos! Verifique os campos novamente.");
         } catch (Exception e){
             campoDeMensagens.setText("Erro ao cadastrar equipamento!");
         }
     }
 
-    public void voltarAplicacao() {
+    private void voltarAplicacao() {
         painel.removeAll();
         painel.setLayout(new GridLayout(1, 1, 5, 5));
         MenuCadastros menuCadastros = new MenuCadastros();
@@ -176,7 +207,7 @@ public class FormularioEquipamentos{
         id.setText("");
         nome.setText("");
         custoDia.setText("");
-        selectType.setSelectedItem(null);
+        tipoDeEquipamento.setSelectedItem(null);
         formatarPainel();
     }
 }

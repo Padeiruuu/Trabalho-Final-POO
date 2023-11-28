@@ -50,11 +50,7 @@ public class MenuCadastros {
         voltarButton.addActionListener(e -> voltarAplicacao());
     }
 
-    public void setPainel(JPanel painel) {
-        this.painel = painel;
-    }
-
-    public void voltarAplicacao() {
+    private void voltarAplicacao() {
         painel.removeAll();
         painel.setLayout(new GridLayout(1, 1, 5, 5));
         MenuPrincipal menuPrincipal = new MenuPrincipal();

@@ -2,7 +2,6 @@ package Dados.Equipamentos;
 
 public class Escavadeira extends Equipamento{
     private String combustivel;
-
     private double carga;
 
     public Escavadeira(int id, String nome, double custoDia, String combustivel, double carga) {
@@ -20,7 +19,7 @@ public class Escavadeira extends Equipamento{
     }
 
     public String toString() {
-        return "Escavadeira\nID: " + super.getId() + "\nNome: " + super.getNome() + "\nCusto por dia: " + super.getCustoDia() + "\nCombustível: " + combustivel + "\nCarga: " + carga + "\n";
+        return "Escavadeira\nID: " + super.getId() + "\nNome: " + super.getNome() + "\nCusto por dia: R$" + super.getCustoDia() + "\nCombustível: " + combustivel + "\nCarga: " + carga + "m³\n";
     }
 }
 
