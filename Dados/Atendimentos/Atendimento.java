@@ -7,10 +7,10 @@ public class Atendimento {
     private String dataInicio;
     private int duracao;
     private String status;
-    private Evento evento;
+    private String evento;
     private Equipe equipe;
 
-    public Atendimento(int cod, String dataInicio, int duracao, Evento evento, Equipe equipe) {
+    public Atendimento(int cod, String dataInicio, int duracao, String status, String evento, Equipe equipe) {
         this.cod = cod;
         this.dataInicio = dataInicio;
         this.duracao = duracao;
@@ -27,14 +27,14 @@ public class Atendimento {
     }
 
     public String toString() {
-        return "Código: " + cod + "\nData de Início: " + dataInicio + "\nDuração: " + duracao + " dias\nEvento: " + evento.getCodigo() + "\nStatus: " + status + "\n";
+        return "Código: " + cod + "\nData de Início: " + dataInicio + "\nDuração: " + duracao + " dias\nEvento: " + evento + "\nStatus: " + status + "\n";
     }
 
     public int getCod() {
         return cod;
     }
 
-    public Evento getEvento() {
+    public String getEvento() {
         return evento;
     }
 

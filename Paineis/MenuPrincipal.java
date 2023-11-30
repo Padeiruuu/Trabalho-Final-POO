@@ -9,12 +9,17 @@ public class MenuPrincipal {
     private CardLayout cardLayout = new CardLayout();
     private JButton cadastrosButton = new JButton("Cadastrar");
     private JButton atendimentosButton = new JButton("Atendimentos");
-    private JButton relatoriosButton = new JButton("Relatórios");
+    private JButton relatoriosButton = new JButton("Relatório");
     private JButton carregarButton = new JButton("Carregar Dados Iniciais");
     private JButton carregarButton2 = new JButton("Carregar Dados");
     private JButton salvarButton = new JButton("Salvar Dados");
     private JButton fecharButton = new JButton("Fechar");
     private JPanel menuPanel = new JPanel();
+    MenuCadastros menuCadastros = new MenuCadastros();
+    VinculoEquipamentoEquipe vínculoEquipamentoEquipe = new VinculoEquipamentoEquipe();
+    DadosAtendimentos dadosAtendimentos = new DadosAtendimentos();
+    Relatorio relatorio = new Relatorio();
+    CarregaDadosIniciais carregaDadosIniciais = new CarregaDadosIniciais();
 
     public MenuPrincipal() {
         formatarPainel();
@@ -27,12 +32,15 @@ public class MenuPrincipal {
 
     private void formatarPainel() {
         painel.setLayout(cardLayout);
-        MenuCadastros menuCadastros = new MenuCadastros();
         painel.add(menuCadastros.getPainel(), "Cadastros");
-        VinculoEquipamentoEquipe vínculoEquipamentoEquipe = new VinculoEquipamentoEquipe();
+        
         painel.add(vínculoEquipamentoEquipe.getPainel(), "Equipes");
-        DadosAtendimentos dadosAtendimentos = new DadosAtendimentos();
+        
         painel.add(dadosAtendimentos.getPainel(), "Atendimentos");
+        
+        painel.add(relatorio.getPainel(), "Relatórios");
+        
+        painel.add(carregaDadosIniciais.getPainel(), "Carregar");
         menuPanel.setLayout(new GridLayout(2, 3, 5, 5));
         painel1.setLayout(new GridLayout(2, 1, 5, 5));
         menuPanel.add(atendimentosButton);
@@ -51,9 +59,10 @@ public class MenuPrincipal {
         cadastrosButton.addActionListener(e -> cardLayout.show(painel, "Cadastros"));
         atendimentosButton.addActionListener(e -> cardLayout.show(painel, "Atendimentos"));
         relatoriosButton.addActionListener(e -> cardLayout.show(painel, "Relatórios"));
-        carregarButton.addActionListener(e -> cardLayout.show(painel, "Carregar"));
-        carregarButton2.addActionListener(e -> cardLayout.show(painel, "Carregar"));
+        carregarButton.addActionListener(e -> { cardLayout.show(painel, "Carregar"); carregaDadosIniciais.abreJanela();
+        });
+        carregarButton2.addActionListener(e -> cardLayout.show(painel, "Carregar2"));
         salvarButton.addActionListener(e -> cardLayout.show(painel, "Salvar"));
         fecharButton.addActionListener(e -> System.exit(0));
-    } 
+    }
 }

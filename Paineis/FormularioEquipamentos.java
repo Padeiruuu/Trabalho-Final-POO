@@ -141,7 +141,7 @@ public class FormularioEquipamentos{
                         campoDeMensagens.setText("Capacidade inválida!");
                         break;
                     }
-                    if(CadastraEquipamento.cadastrarEquipamento(new Barco(id, nome, custoDia, capacidade)))
+                    if(CadastraEquipamento.cadastrarEquipamento(new Barco(id, nome, custoDia, "",capacidade)))
                         campoDeMensagens.setText("Barco cadastrado com sucesso!");
                     else{
                         campoDeMensagens.setText("Erro ao cadastrar equipamento!");
@@ -153,7 +153,7 @@ public class FormularioEquipamentos{
                         campoDeMensagens.setText("Capacidade inválida!");
                         break;
                     }
-                    if (CadastraEquipamento.cadastrarEquipamento(new CaminhaoTanque(id, nome, custoDia, capacidadeTanque)))
+                    if (CadastraEquipamento.cadastrarEquipamento(new CaminhaoTanque(id, nome, custoDia, "",capacidadeTanque)))
                         campoDeMensagens.setText("Caminhão Tanque cadastrado com sucesso!");
                     else {
                         campoDeMensagens.setText("Erro ao cadastrar equipamento!");
@@ -170,7 +170,7 @@ public class FormularioEquipamentos{
                         campoDeMensagens.setText("Carga inválida!");
                         break;
                     }
-                    if(CadastraEquipamento.cadastrarEquipamento(new Escavadeira(id, nome, custoDia, combustivel, carga)))
+                    if(CadastraEquipamento.cadastrarEquipamento(new Escavadeira(id, nome, custoDia, "",combustivel, carga)))
                         campoDeMensagens.setText("Escavadeira cadastrada com sucesso!");
                     else{
                         campoDeMensagens.setText("Erro ao cadastrar equipamento!");

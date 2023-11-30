@@ -92,6 +92,7 @@ public class VinculoEquipamentoEquipe {
                 for (Equipe equipe : CadastraEquipe.getEquipes()) {
                     if (equipe.getCodinome().equals(equipeSelecionada)) {
                         if(equipe.addEquipamento(equipamento));{
+                            equipamento.setEquipe(equipe.getCodinome());
                             campoDeMensagens.setText("Equipamento vinculado com sucesso!");
                             selectEquipamento.setSelectedItem(null);
                             return;

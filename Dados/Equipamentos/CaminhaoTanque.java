@@ -3,8 +3,8 @@ package Dados.Equipamentos;
 public class CaminhaoTanque extends Equipamento{
     private double capacidade;
 
-    public CaminhaoTanque(int id, String nome, double custoDia, double capacidade) {
-        super(id, nome, custoDia);
+    public CaminhaoTanque(int id, String nome, double custoDia, String equipe, double capacidade) {
+        super(id, nome, custoDia, equipe);
         this.capacidade = capacidade;
     }
 

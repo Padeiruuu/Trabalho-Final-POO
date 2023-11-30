@@ -3,6 +3,7 @@ import java.util.Queue;
 
 import Dados.Equipes.CadastraEquipe;
 import Dados.Equipes.Equipe;
+import Dados.Eventos.CadastraEvento;
 
 import java.util.Comparator;
 import java.util.LinkedList;
@@ -18,7 +19,7 @@ public class CadastraAtendimento {
             if (a.getCod() == atendimento.getCod()) {
                 return false;
             }
-            else if(a.getEvento().getCodigo().equals(atendimento.getEvento().getCodigo())){
+            else if(a.getEvento().equals(atendimento.getEvento())){
                 return false;
             }
         }
@@ -124,8 +125,8 @@ public class CadastraAtendimento {
     public static double getDistancia(Atendimento atendimento, Equipe equipe){
         double latEq = Math.toRadians(equipe.getLatitude());
         double lonEq = Math.toRadians(equipe.getLongitude());
-        double latEv = Math.toRadians(atendimento.getEvento().getLatitude());
-        double lonEv = Math.toRadians(atendimento.getEvento().getLongitude());
+        double latEv = Math.toRadians(CadastraEvento.getEvento(atendimento.getEvento()).getLatitude());
+        double lonEv = Math.toRadians(CadastraEvento.getEvento(atendimento.getEvento()).getLongitude());
         double lon = lonEv - lonEq;
         double lat = latEv - latEq;
         double dif = Math.pow(Math.sin(lat / 2), 2) + Math.cos(latEq) * Math.cos(latEv) * Math.pow(Math.sin(lon / 2), 2);

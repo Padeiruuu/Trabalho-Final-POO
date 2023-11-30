@@ -11,6 +11,24 @@ public class CadastraEvento {
                 return false;
             }
         }
+        if(evento.getLatitude() < -90 || evento.getLatitude() > 90 || evento.getLongitude() < -180 || evento.getLongitude() > 180) {
+            return false;
+        }
+        if(evento instanceof Ciclone) {
+            if(((Ciclone) evento).getVelocidade() < 0) {
+                return false;
+            }
+        }
+        if(evento instanceof Seca) {
+            if(((Seca) evento).getEstiagem() < 0) {
+                return false;
+            }
+        }
+        if(evento instanceof Terremoto) {
+            if(((Terremoto) evento).getMagnitude() < 0 && ((Terremoto) evento).getMagnitude() > 10) {
+                return false;
+            }
+        }
         eventos.add(evento);
         ordenarEventos();
         return true;
@@ -31,5 +49,14 @@ public class CadastraEvento {
 
     public static ArrayList<Evento> getEventos() {
         return eventos;
+    }
+
+    public static Evento getEvento(String codigo) {
+        for(Evento evento : eventos) {
+            if (evento.getCodigo().equals(codigo)) {
+                return evento;
+            }
+        }
+        return null;
     }
 }

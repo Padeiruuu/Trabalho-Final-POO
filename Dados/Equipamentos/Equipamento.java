@@ -4,11 +4,13 @@ public class Equipamento{
     private int id;
     private String nome;
     private double custoDia;
+    private String equipe;
 
-    public Equipamento(int id, String nome, double custoDia) {
+    public Equipamento(int id, String nome, double custoDia, String equipe) {
         this.id = id;
         this.nome = nome;
         this.custoDia = custoDia;
+        this.equipe = equipe;
     }
 
     public int getId() {
@@ -21,5 +23,13 @@ public class Equipamento{
 
     public double getCustoDia() {
         return custoDia;
+    }
+
+    public String getEquipe() {
+        return equipe;
+    }
+
+    public void setEquipe(String codinome) {
+        this.equipe = codinome;
     }
 }

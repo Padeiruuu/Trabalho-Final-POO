@@ -94,7 +94,7 @@ public class FormularioAtendimentos {
             }
             for(Evento evento : CadastraEvento.getEventos()) {
                 if (evento.getCodigo().equals(selectEvento.getSelectedItem())) {
-                    if (CadastraAtendimento.cadastrarAtendimento(new Atendimento(id, data, duracao, evento, null))) {
+                    if (CadastraAtendimento.cadastrarAtendimento(new Atendimento(id, data, duracao, null,evento.getCodigo(), null))) {
                         campoDeMensagens.setText("Atendimento cadastrado com sucesso!");
                     } else {
                         campoDeMensagens.setText("Atendimento já cadastrado ou evento inválido!");

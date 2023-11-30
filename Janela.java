@@ -8,7 +8,7 @@ public class Janela extends JFrame{
     public Janela(){
         menuPrincipal = new MenuPrincipal();
         this.add(menuPrincipal.getPainel());
-        this.setTitle("Trabalho Final - POO");
+        this.setTitle("ACMERescue");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(600,500);
         this.setVisible(true);

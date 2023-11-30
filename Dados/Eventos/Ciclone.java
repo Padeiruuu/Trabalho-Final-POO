@@ -13,4 +13,8 @@ public class Ciclone extends Evento{
     public String toString() {
         return "Ciclone\nCódigo: " + super.getCodigo() + "\nData: " + super.getData() + "\nLatitude: " + super.getLatitude() + "\nLongitude: " + super.getLongitude() + "\nVelocidade: " + velocidade + "km/h" + "\nPrecipitação: " + precipitacao + "mm\n";
     }
+
+    public double getVelocidade() {
+        return velocidade;
+    }
 }
